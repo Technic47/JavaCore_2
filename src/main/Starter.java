@@ -23,18 +23,28 @@ public class Starter {
         book.addWorker(new MonthWorker("Serega", 35000.0));
         book.addWorker(new MonthWorker("Kostian", 15000.0));
 
+        //Сортированный лист используя Comparator
         List<Worker> workerSortedList = book.getSortedList();
-        workerSortedList.forEach(worker -> System.out.println(worker.toString()));
+        workerSortedList.forEach(System.out::println);
 
+        //Вывод содержимого как есть
         System.out.println();
         book.printWorkerSet();
 
+        //Пример Iterator
         System.out.println();
         book.forEach(System.out::println);
 
+        //Результат аналогичный Iterator, но через простое условие.
+        System.out.println();
+        workerSortedList.forEach(worker -> {
+            if (worker.showSalary() < 35000) System.out.println(worker);
+        });
+
+        //Результат аналогичный Iterator, но через фильтр.
         System.out.println();
         workerSortedList.stream()
-                .filter(worker -> worker.showSalary() >= 35000)
+                .filter(worker -> worker.showSalary() < 35000)
                 .toList()
                 .forEach(System.out::println);
     }
